@@ -25,8 +25,12 @@ Choices: Default/Development/Lab/Pre-prod/Production/Staging/Test
 Choices: Info/Low/Medium/High/Critical
 
 
-### Launch example
-
+### Launch
+Before first launch ypu should install pip packages:
+```
+pip install -r requirements.txt
+```
+Simple launch example:
 ```
 python3 stingray-defectdojo/import_scan.py -u https://saas.stingray/rest -l admin -p P@ssw0rd -id 1337 --file_name buggen --dojo_url https://dojo.com --dojo_key D0j0S3cr3t --engagement_id 1 -env Staging
 ```
