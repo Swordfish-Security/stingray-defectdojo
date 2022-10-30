@@ -10,8 +10,9 @@ A small python tool for exporting [Stingray](https://stingray-mobile.ru/) scan r
 **Stingray**:
  * `--login` - Stingray login
  * `--password` - Stingray password
- * `--url` - network address for system (System url, should be with /rest, example: https://saas.stingray.ru/rest')
- * `--scan_id` - identifier of the scan to be exported
+ * `--url` - network address for system (System url, should be with /rest, example: https://saas.stingray.ru/rest)
+ * `--scan_id` - identifier of the scan to be exported  
+
 **Defect Dojo**:
  * `--dojo_url` - Url to DefectDojo server
  * `--dojo_key` - DefectDojo api v2 key
