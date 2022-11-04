@@ -3,7 +3,8 @@
 **Stingray scan result to DefectDojo importer**
 
 A small python tool for exporting [Stingray](https://stingray-mobile.ru/) scan result to [DefectDojo](https://www.defectdojo.org/) generic findings json format and then importing it to your DefectDojo project as findings import.
-
+  
+Demo in russian: https://www.youtube.com/watch?v=G5DTlYcpO0Y
 ### Launch parameters
 
 **Required parameters**:  
