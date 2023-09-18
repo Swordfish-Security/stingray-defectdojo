@@ -62,7 +62,7 @@ def import_scan_to_dojo(file_path):
         'scan_type': 'Generic Findings Import',
         'environment': dojo_environment,
         'minimum_severity': dojo_min_severity,
-        'scan_date': get_scan_creation_date(stingray, scan_id)
+        'scan_date': get_scan_creation_date(stingray, scan_id),
         'test_title': 'Stingray'
     }
     form_data = {
