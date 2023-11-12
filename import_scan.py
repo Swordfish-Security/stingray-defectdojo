@@ -37,14 +37,17 @@ def get_scan(import_scan_id):
     issue_data_keys = stingray.get_localization_issue_data_keys().json()
     dast_issues = stingray.download_scan_json_result(import_scan_id).json()['defects']
     for issue in dast_issues:
+        issue_id = issue['name'].split('.')[0].replace('STG-', '')
+        issue_link = f"{url.replace('rest', '')}/scans/{import_scan_id}/defects?defect={issue_id}"
         try:
             issue_data_for_dojo = {
-                "title": f"{issue['name']}: {issue['description']}",
-                "description": f"{get_localization(issue_data_keys, issue['details'][0])}",
+                "title": f"{issue['name']}",
+                "description": f"{issue['description']}\n"
+                               f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
                 "severity": f"{severity[issue['severity']]}",
                 "mitigation": f"{issue['requirement']}",
-                "cve": f"{issue['name']}",
-                "references": f"{issue['recommendations']}"
+                "cve": f"{issue['name'].split('.')[0]}",
+                "references": f"{issue_link}\n\n{issue['recommendations']}"
             }
             dast_info['findings'].append(issue_data_for_dojo)
         except ValueError:
