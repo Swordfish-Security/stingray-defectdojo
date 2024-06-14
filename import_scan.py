@@ -41,12 +41,11 @@ def get_scan(import_scan_id):
         issue_link = f"{url.replace('rest', '')}/scans/{import_scan_id}/defects?defect={issue_id}"
         try:
             issue_data_for_dojo = {
-                "title": f"{issue['name']}",
-                "description": f"{issue['description']}\n"
+                "title": f"{issue['name'][:50]}",
+                "description": f"{issue['name']}\n\n{issue['description']}\n"
                                f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
                 "severity": f"{severity[issue['severity']]}",
                 "mitigation": f"{issue['requirement']}",
-                "cve": f"{issue['name'].split('.')[0]}",
                 "references": f"{issue_link}\n\n{issue['recommendations']}"
             }
             dast_info['findings'].append(issue_data_for_dojo)
