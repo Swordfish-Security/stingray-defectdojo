@@ -46,7 +46,7 @@ def get_scan(import_scan_id):
                 "vuln_id_from_tool": f"{issue['name'][:10]}",
                 "cve": f"{make_num(issue['name'][:10])}",
                 "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]),
-                "title": f"{issue['name'][12:61]}",
+                "title": f"{issue['name'].split(' ', 1)[1][:50]}",
                 "description": f"{issue['name']}\n\n{issue['description']}\n"
                                f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
                 "severity": f"{severity[issue['severity']]}",
