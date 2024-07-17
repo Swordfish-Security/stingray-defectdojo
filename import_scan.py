@@ -34,19 +34,25 @@ def parse_args():
 def get_scan(import_scan_id):
     logging.info(f'Collecting scan {import_scan_id} results..')
     dast_info = {'findings': []}
+    make_num = lambda s: ''.join([c for c in s if c.isdigit()])
     issue_data_keys = stingray.get_localization_issue_data_keys().json()
     dast_issues = stingray.download_scan_json_result(import_scan_id).json()['defects']
     for issue in dast_issues:
         issue_id = issue['name'].split('.')[0].replace('STG-', '')
+        issue_info = stingray.get_issue_info(issue_id).json()
         issue_link = f"{url.replace('rest', '')}/scans/{import_scan_id}/defects?defect={issue_id}"
         try:
             issue_data_for_dojo = {
-                "title": f"{issue['name'][:50]}",
+                "vuln_id_from_tool": f"{issue['name'][:10]}",
+                "cve": f"{make_num(issue['name'][:10])}",
+                "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]),
+                "title": f"{issue['name'][12:61]}",
                 "description": f"{issue['name']}\n\n{issue['description']}\n"
                                f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
                 "severity": f"{severity[issue['severity']]}",
                 "mitigation": f"{issue['requirement']}",
-                "references": f"{issue_link}\n\n{issue['recommendations']}"
+                "references": f"{issue_link}\n\n{issue['recommendations']}\n\n"
+                              f"CWE list:{'  '.join(map(str, issue_info['project_issue']['type']['cwe']))}"
             }
             dast_info['findings'].append(issue_data_for_dojo)
         except ValueError:
