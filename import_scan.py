@@ -44,8 +44,8 @@ def get_scan(import_scan_id):
         issue_link = f"{url.replace('rest', '')}scans/{import_scan_id}/defects?defect={issue_id}"
         try:
             issue_data_for_dojo = {
-                "vuln_id_from_tool": f"STG-{issue_info['project_issue']['id']}",
-                "cve": f"{make_num(issue['name'][:10])}",
+                "vuln_id_from_tool": f"{issue_info['project_issue']['id']}",
+                "cve": f"{issue['project_issue_id']}",
                 "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]),
                 "title": f"{issue['name'].split(' ', 1)[1][:50]}",
                 "description": f"{issue['name']}\n\n{issue['description']}\n"
