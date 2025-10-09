@@ -46,7 +46,7 @@ def get_scan(import_scan_id):
             issue_data_for_dojo = {
                 "vuln_id_from_tool": f"{issue_info['project_issue']['id']}",
                 "cve": f"{issue['project_issue_id']}",
-                "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]),
+                "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]) if issue_info['project_issue']['type']['cwe'] else 0,
                 "title": f"{issue['name'].split(' ', 1)[1][:50]}",
                 "description": f"{issue['name']}\n\n{issue['description']}\n"
                                f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
