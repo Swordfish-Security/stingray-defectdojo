@@ -48,7 +48,7 @@ def get_scan(import_scan_id):
                 "cve": f"{issue['project_issue_id']}",
                 "cwe": make_num(issue_info['project_issue']['type']['cwe'][0]) if issue_info['project_issue']['type']['cwe'] else 0,
                 "title": f"{issue['name'].split(' ', 1)[1][:50]}",
-                "description": f"{issue['name']}\n\n{issue['description']}\n"
+                "description": f"{issue['description']}\n"
                                f"\n{get_localization(issue_data_keys, issue['details'][0])}\n",
                 "severity": f"{severity[issue['severity']]}",
                 "mitigation": f"{issue['requirement']}",
